@@ -7,17 +7,15 @@ import com.yimobility.airesume.repo.FileDataRepository;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 
-import org.springframework.http.*;
-import org.springframework.web.client.RestTemplate;
+import java.io.*;
+
 
 @Service
 public class FileStorageService {
@@ -29,9 +27,6 @@ public class FileStorageService {
     @Autowired
     private TextStorageService textStorageService;
 
-//    public FileStorageService(FileDataRepository fileDataRepository) {
-//        this.fileDataRepository = fileDataRepository;
-//    }
 
     public void uploadFile(MultipartFile file) throws IOException {
         Resume fileData = new Resume();
@@ -41,26 +36,49 @@ public class FileStorageService {
         
         // Save the file data to the database
       fileDataRepository.save(fileData);
-      String extractedText = extractTextFromWordDocument(file);
+//      String extractedText = extractTextFromWordDocument(file);
+      
+      String extractedText = extractTextFromDocument(file);
         textStorageService.setExtractedText(extractedText);
 
 
     }
 
 
-    public String extractTextFromWordDocument(MultipartFile file) throws IOException {
-        try (InputStream inputStream = file.getInputStream()) {
-            XWPFDocument document = new XWPFDocument(inputStream);
-            XWPFWordExtractor extractor = new XWPFWordExtractor(document);
-            System.out.println(extractor.getText());
-            return extractor.getText();
+//    public String extractTextFromWordDocument(MultipartFile file) throws IOException {
+//        try (InputStream inputStream = file.getInputStream()) {
+//            XWPFDocument document = new XWPFDocument(inputStream);
+//            XWPFWordExtractor extractor = new XWPFWordExtractor(document);
+//            System.out.println(extractor.getText());
+//            return extractor.getText();
+//        }
+//    }
+
+    
+    
+
+    public String extractTextFromDocument(MultipartFile file) throws IOException {
+        String fileName = file.getOriginalFilename();
+        if (fileName == null) {
+            throw new IOException("Invalid file name.");
+        }
+
+        if (fileName.endsWith(".docx")) {
+            try (InputStream inputStream = file.getInputStream()) {
+                XWPFDocument document = new XWPFDocument(inputStream);
+                XWPFWordExtractor extractor = new XWPFWordExtractor(document);
+                return extractor.getText();
+            }
+        } else if (fileName.endsWith(".pdf")) {
+            try (InputStream inputStream = file.getInputStream();
+                 PDDocument pdfDocument = PDDocument.load(inputStream)) {
+                PDFTextStripper stripper = new PDFTextStripper();
+                return stripper.getText(pdfDocument);
+            }
+        } else {
+            throw new IOException("Unsupported file format.");
         }
     }
-
-    
-    
-
-
 
 }
 

@@ -51,7 +51,7 @@ public class FileUploadController {
     @PostMapping("/extract-text")
     public ResponseEntity<String> extractText(@RequestParam("file") MultipartFile file) {
         try {
-            String text =  fileStorageService.extractTextFromWordDocument(file);
+            String text =  fileStorageService.extractTextFromDocument(file);
             return ResponseEntity.ok(text);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing file");
