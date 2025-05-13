@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yimobility.airesume.Model.JobDescription;
-import com.yimobility.airesume.repo.ScoreRepository;
+//import com.yimobility.airesume.repo.ScoreRepository;
 
 @Service
 
 public class ScoreService{
 	
-	 @Autowired
-	 private ScoreRepository scoreRepository;
+//	 @Autowired
+//	 private ScoreRepository scoreRepository;
 	 
 	  @Autowired
 	  private TextStorageService textStorageService;
@@ -22,9 +22,9 @@ public class ScoreService{
 		 JobDescription data = new JobDescription();
 
          data.setText(description);
-         System.out.println(scoreRepository.save(data));
+//         System.out.println(scoreRepository.save(data));
          textStorageService.setJobDescription(description);
-         scoreRepository.save(data);
+        // scoreRepository.save(data);
 
      }
 	 

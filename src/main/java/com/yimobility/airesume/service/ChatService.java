@@ -40,8 +40,8 @@ public class ChatService{
         
       String extractedOutput= client.prompt(comparisonPrompt).call().content();
       
-      String boldStart = "\033[0;1m"; // ANSI bold start
-      String boldEnd = "\033[0;0m";   // ANSI bold end
+//      String boldStart = "\033[0;1m"; // ANSI bold start
+//      String boldEnd = "\033[0;0m";   // ANSI bold end
     
       String extractedNewOutput = extractedOutput.replace("```", "")
     		  					  .replace("json", "")

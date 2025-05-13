@@ -3,7 +3,7 @@ package com.yimobility.airesume.service;
 import com.yimobility.airesume.Model.Resume;
 
 
-import com.yimobility.airesume.repo.FileDataRepository;
+//import com.yimobility.airesume.repo.FileDataRepository;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ import java.io.*;
 public class FileStorageService {
 
 
-    @Autowired
-    private FileDataRepository fileDataRepository;
+//    @Autowired
+//    private FileDataRepository fileDataRepository;
     
     @Autowired
     private TextStorageService textStorageService;
@@ -35,7 +35,7 @@ public class FileStorageService {
         fileData.setData(file.getBytes());
         
         // Save the file data to the database
-      fileDataRepository.save(fileData);
+//      fileDataRepository.save(fileData);
 //      String extractedText = extractTextFromWordDocument(file);
       
       String extractedText = extractTextFromDocument(file);

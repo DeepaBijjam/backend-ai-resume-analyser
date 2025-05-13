@@ -1,26 +1,26 @@
 package com.yimobility.airesume.Model;
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
+//import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 
-@Entity
+//@Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 
 public class Resume {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private String type;
    
 
-    @Lob
+//    @Lob
     private byte[] data;
 
 
