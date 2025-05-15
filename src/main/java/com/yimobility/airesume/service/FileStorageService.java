@@ -19,10 +19,6 @@ import java.io.*;
 
 @Service
 public class FileStorageService {
-
-
-//    @Autowired
-//    private FileDataRepository fileDataRepository;
     
     @Autowired
     private TextStorageService textStorageService;
@@ -33,29 +29,11 @@ public class FileStorageService {
         fileData.setName(file.getOriginalFilename());
         fileData.setType(file.getContentType());
         fileData.setData(file.getBytes());
-        
-        // Save the file data to the database
-//      fileDataRepository.save(fileData);
-//      String extractedText = extractTextFromWordDocument(file);
-      
-      String extractedText = extractTextFromDocument(file);
+        String extractedText = extractTextFromDocument(file);
         textStorageService.setExtractedText(extractedText);
 
 
     }
-
-
-//    public String extractTextFromWordDocument(MultipartFile file) throws IOException {
-//        try (InputStream inputStream = file.getInputStream()) {
-//            XWPFDocument document = new XWPFDocument(inputStream);
-//            XWPFWordExtractor extractor = new XWPFWordExtractor(document);
-//            System.out.println(extractor.getText());
-//            return extractor.getText();
-//        }
-//    }
-
-    
-    
 
     public String extractTextFromDocument(MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();

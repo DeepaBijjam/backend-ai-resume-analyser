@@ -20,12 +20,8 @@ public class ScoreService{
 	 
 	 public void saveTextData(String description) {
 		 JobDescription data = new JobDescription();
-
          data.setText(description);
-//         System.out.println(scoreRepository.save(data));
          textStorageService.setJobDescription(description);
-        // scoreRepository.save(data);
-
      }
 	 
 	 

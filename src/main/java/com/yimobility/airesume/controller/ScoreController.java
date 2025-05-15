@@ -35,7 +35,6 @@ public class ScoreController {
 	   public ResponseEntity<String> saveTextData(@RequestBody JobDescription jobdescription) {
 		try {
         scoreService.saveTextData(jobdescription.getDescription());
-//		System.out.println(jobdescription.getDescription());
         return new ResponseEntity<>("Text saved successfully", HttpStatus.OK);
 		}
 		catch(Exception e){

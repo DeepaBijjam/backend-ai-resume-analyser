@@ -17,21 +17,6 @@ public class AiresumeApplication {
 
 
 	}
-	
-
-
-//	@Bean
-//	CommandLineRunner commandLineRunner(ChatClient.Builder builder) {
-//		return args -> {
-//			var client = builder.build();
-//			
-//			String response = client.prompt("Tell me about Sri Rama Navami festival")
-//			.call()
-//					.content();
-//			System.out.println(response);
-//		};
-//	}
-
 	}
 	
 

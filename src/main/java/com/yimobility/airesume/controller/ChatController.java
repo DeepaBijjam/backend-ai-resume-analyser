@@ -35,11 +35,7 @@ public class ChatController{
 	public String scoreResume() throws IOException {
 	    String resumeText = textStorageService.getExtractedText();
 	    String jobDescriptionText = textStorageService.getDescription();
-  
 	    return chatService.compareResumeWithJobDescription(resumeText,jobDescriptionText);
-	    
-//	    return new ResponseEntity<>("Text saved successfully", HttpStatus.OK);
-
 	}
 	
 }
