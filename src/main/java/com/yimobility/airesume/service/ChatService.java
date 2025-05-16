@@ -52,6 +52,7 @@ public class ChatService{
     		  					  .replace("],", "")
     		  					  .replace("\"", "")
     		  					  .replace("]", "")
+								  .replace("<ul>","")
     		  					  .replaceAll("\\s*,\\s*\n", "\n");
       
 //      extractedNewOutput = extractedNewOutput.replace("Score:", boldStart + "Score:" + boldEnd)
